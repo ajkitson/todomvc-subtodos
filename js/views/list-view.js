@@ -8,9 +8,6 @@ var app = app || {};
   // ---------------
   app.ListView = Backbone.View.extend({
 
-    // Our template for the line of statistics at the bottom of the list
-    statsTemplate: _.template($('#stats-template').html()),
-
     listTemplate: _.template($('#list-template').html()),
 
     // Delegated events for creating new items, and clearing completed ones.
@@ -26,7 +23,6 @@ var app = app || {};
       this.$el.html(this.listTemplate());
       this.allCheckbox = this.$('#toggle-all')[0];
       this.$input = this.$('#new-todo');
-      this.$footer = this.$('#footer');
       this.$main = this.$('#main');
       this.$list = this.$('#todo-list');
 
@@ -40,27 +36,13 @@ var app = app || {};
     // Re-rendering the list just means refreshing the statistics -- the rest
     // of the list doesn't change.
     render: function () {
-      var completed = this.collection.completed().length;
-      var remaining = this.collection.remaining().length;
 
       if (this.collection.length) {
         this.$main.show();
-        this.$footer.show();
-
-        this.$footer.html(this.statsTemplate({
-          completed: completed,
-          remaining: remaining
-        }));
-
-        this.$('#filters li a')
-          .removeClass('selected')
-          .filter('[href="#/' + (app.TodoFilter || '') + '"]')
-          .addClass('selected');
       } else {
         this.$main.hide();
-        this.$footer.hide();
       }
-      this.allCheckbox.checked = !remaining;
+      // this.allCheckbox.checked = !remaining;
 
       return this;
     },
