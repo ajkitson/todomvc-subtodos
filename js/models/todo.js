@@ -16,6 +16,10 @@ var app = app || {};
 			completed: false
 		},
 
+		initialize: function () {
+			this.set('subtasks', new app.Todos());
+		},
+
 		// Toggle the `completed` state of this todo item.
 		toggle: function () {
 			this.save({

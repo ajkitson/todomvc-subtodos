@@ -22,7 +22,8 @@ var app = app || {};
 			'click .destroy': 'clear',
 			'keypress .edit': 'updateOnEnter',
 			'keydown .edit': 'revertOnEscape',
-			'blur .edit': 'close'
+			'blur .edit': 'close',
+			'click .subtask': 'toggleSubtasks'
 		},
 
 		// The TodoView listens for changes to its model, re-rendering. Since
@@ -30,6 +31,11 @@ var app = app || {};
 		// **TodoView** in this app, we set a direct reference on the model for
 		// convenience.
 		initialize: function () {
+			this.showSubtasks = false;
+			this.subtaskView = new app.ListView({
+				collection: this.model.get('subtasks')
+			});
+
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'destroy', this.remove);
 			this.listenTo(this.model, 'visible', this.toggleVisible);
@@ -49,6 +55,10 @@ var app = app || {};
 			}
 
 			this.$el.html(this.template(this.model.toJSON()));
+			if (this.showSubtasks) {
+				this.$el.append(this.subtaskView.render().el);
+			}
+
 			this.$el.toggleClass('completed', this.model.get('completed'));
 			this.toggleVisible();
 			this.$input = this.$('.edit');
@@ -127,6 +137,12 @@ var app = app || {};
 		// Remove the item, destroy the model from *localStorage* and delete its view.
 		clear: function () {
 			this.model.destroy();
+		},
+
+		toggleSubtasks: function () {
+			this.showSubtasks = !this.showSubtasks;
+			this.render();
 		}
+
 	});
 })(jQuery);
