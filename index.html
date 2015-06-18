@@ -5,6 +5,34 @@
 		<title>Backbone.js • TodoMVC</title>
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+
+		<style type="text/css">
+			#todo-list li .subtask {
+				display: none;
+				position: absolute;
+				top: 0;
+				right: 50px;
+				bottom: 0;
+				width: 100px;
+				height: 40px;
+				margin: auto 0;
+				font-size: 16px;
+				color: #cc9a9a;
+				transition: color 0.2s ease-out;
+			}
+
+			#todo-list li .subtask:hover {
+				color: #af5b5e;
+			}
+
+			#todo-list li .subtask:after {
+				content: 'add subtask';
+			}
+
+			#todo-list li:hover .subtask {
+				display: block;
+			}
+		</style>
 	</head>
 	<body>
 		<section id="todoapp">
@@ -31,6 +59,7 @@
 			<div class="view">
 				<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
 				<label><%- title %></label>
+				<button class="subtask"></button>
 				<button class="destroy"></button>
 			</div>
 			<input class="edit" value="<%- title %>">
