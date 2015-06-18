@@ -20,7 +20,9 @@ var app = app || {};
     // At initialization we bind to the relevant events on the `Todos`
     // collection, when items are added or changed.
     initialize: function () {
-      this.$el.html(this.listTemplate());
+      this.$el.html(this.listTemplate({
+        isRoot: this.collection === app.todos
+      }));
       this.allCheckbox = this.$('#toggle-all')[0];
       this.$input = this.$('#new-todo');
       this.$main = this.$('#main');
