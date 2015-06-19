@@ -5,34 +5,7 @@
 		<title>Backbone.js • TodoMVC</title>
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
-
-		<style type="text/css">
-			#todo-list li .subtask {
-				display: none;
-				position: absolute;
-				top: 0;
-				right: 50px;
-				bottom: 0;
-				width: 100px;
-				height: 40px;
-				margin: auto 0;
-				font-size: 16px;
-				color: #cc9a9a;
-				transition: color 0.2s ease-out;
-			}
-
-			#todo-list li .subtask:hover {
-				color: #af5b5e;
-			}
-
-			#todo-list li .subtask:after {
-				content: 'add subtask';
-			}
-
-			#todo-list li:hover .subtask {
-				display: block;
-			}
-		</style>
+		<link rel="stylesheet" href="todo.css">
 	</head>
 	<body>
 		<section id="todoapp">
@@ -48,7 +21,7 @@
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
 		<script type="text/template" id="list-template">
-    	<input id="new-todo" placeholder="What needs to be done?" autofocus>
+    	<input class="new-todo" placeholder="What needs to be done?" autofocus>
 			<section id="main">
 	      <% if (isRoot) { %>
 	      <label for="toggle-all">Mark all as complete</label>

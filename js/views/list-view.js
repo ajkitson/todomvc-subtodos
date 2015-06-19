@@ -12,7 +12,7 @@ var app = app || {};
 
     // Delegated events for creating new items, and clearing completed ones.
     events: {
-      'keypress #new-todo': 'createOnEnter',
+      'keypress .new-todo': 'createOnEnter',
       'click #clear-completed': 'clearCompleted',
       'click #toggle-all': 'toggleAllComplete',
     },
@@ -24,7 +24,7 @@ var app = app || {};
         isRoot: this.collection === app.todos
       }));
       this.allCheckbox = this.$('#toggle-all')[0];
-      this.$input = this.$('#new-todo');
+      this.$input = this.$('.new-todo');
       this.$main = this.$('#main');
       this.$list = this.$('#todo-list');
 
@@ -33,18 +33,22 @@ var app = app || {};
       this.listenTo(this.collection, 'change:completed', this.filterOne);
       this.listenTo(this.collection, 'filter', this.filterAll);
       this.listenTo(this.collection, 'all', _.debounce(this.render, 0));
+
     },
 
-    // Re-rendering the list just means refreshing the statistics -- the rest
-    // of the list doesn't change.
+    // Re-rendering the list just means showing or hiding the main list
+    // as appropriate. The rest of the view doesn't change
     render: function () {
-
+      console.log('rednering list view');
+      console.dir(this.events)
       if (this.collection.length) {
         this.$main.show();
       } else {
         this.$main.hide();
       }
-      // this.allCheckbox.checked = !remaining;
+      if (this.allCheckbox) {
+        this.allCheckbox.checked = !app.todos.remaining().length;
+      }
 
       return this;
     },
