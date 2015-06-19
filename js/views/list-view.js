@@ -13,7 +13,6 @@ var app = app || {};
     // Delegated events for creating new items, and clearing completed ones.
     events: {
       'keypress .new-todo': 'createOnEnter',
-      'click #clear-completed': 'clearCompleted',
       'click #toggle-all': 'toggleAllComplete',
     },
 
@@ -94,12 +93,6 @@ var app = app || {};
         this.collection.create(this.newAttributes());
         this.$input.val('');
       }
-    },
-
-    // Clear all completed todo items, destroying their models.
-    clearCompleted: function () {
-      _.invoke(this.collection.completed(), 'destroy');
-      return false;
     },
 
     toggleAllComplete: function () {

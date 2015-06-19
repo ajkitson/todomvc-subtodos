@@ -50,8 +50,10 @@ var app = app || {};
       if (this.model.changed.id !== undefined) {
         return;
       }
-
-      this.$el.html(this.template(this.model.toJSON()));
+      var todo = this.model.toJSON();
+      todo.atRoot = this.model.collection === app.todos;
+      todo.subtasksVisible = this.showSubtasks;
+      this.$el.html(this.template(todo));
       if (this.showSubtasks) {
         this.$el.append(new app.ListView({
           collection: this.model.get('subtasks')

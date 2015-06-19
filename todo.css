@@ -1,5 +1,5 @@
 .subtask-list {
-  margin: 10px 0 10px 50px
+  margin: -15px 0 10px 50px
 }
 
 .new-todo,
@@ -30,17 +30,22 @@
   box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
 }
 
+#todo-list li .destroy {
+  margin: 10px 0 0;
+}
+
 #todo-list li .subtask {
   display: none;
   position: absolute;
   top: 0;
   right: 50px;
   bottom: 0;
-  width: 100px;
+  width: 130px;
   height: 40px;
-  margin: auto 0;
+  margin: 10px 0 0;
   font-size: 16px;
   color: #cc9a9a;
+  text-align: right;
   transition: color 0.2s ease-out;
 }
 
@@ -48,10 +53,14 @@
   color: #af5b5e;
 }
 
-#todo-list li .subtask:after {
+/*#todo-list li .subtask:after {
   content: 'add subtask';
 }
-
+*/
 #todo-list li:hover .subtask {
   display: block;
+}
+
+#todo-list li .toggle {
+  margin: 15px 0;
 }
