@@ -65,6 +65,9 @@ var app = app || {};
 
     // Add all items in the **Todos** collection at once.
     addAll: function () {
+      if (app.isRoot(this.collection)) {
+        this.collection.moveSubtasks();
+      }
       this.$list.html('');
       this.collection.each(this.addOne, this);
     },

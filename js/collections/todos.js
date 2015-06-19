@@ -32,6 +32,24 @@ var app = app || {};
 			return this.length ? this.last().get('order') + 1 : 1;
 		},
 
+		// We have this because local storage doesn't allow us to just fetch
+		// tasks for a specific collection. Instead, we get all of them and
+		// filter them here.
+		moveSubtasks: function () {
+      var subtasks = this.filter(function (task) {
+        return task.get('isSubtask');
+      });
+      this.remove(subtasks);
+
+      subtasks.forEach(function (subtask) {
+        var parent = this.get(subtask.get('parentID'));
+        if (parent) {
+          parent.get('subtasks').add(subtask);
+        }
+      }.bind(this));
+
+		},
+
 		// Todos are sorted by their original insertion order.
 		comparator: 'order'
 	});

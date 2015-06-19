@@ -38,7 +38,6 @@ var app = app || {};
 
       app.todos.fetch({ reset: true });
       this.listenTo(app.todos, 'all', _.debounce(this.render, 0));
-
       this.render();
     },
 
