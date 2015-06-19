@@ -51,8 +51,7 @@ var app = app || {};
 			});
 
 			if (subtasks.length && allComplete) {
-				this.set('completed', true);
-				this.save();
+				this.save({ completed: true });
 			}
 
 		},

@@ -34,13 +34,23 @@ var app = app || {};
 
 		// We have this because local storage doesn't allow us to just fetch
 		// tasks for a specific collection. Instead, we get all of them and
-		// filter them here.
+		// filter them here, moving subtasks onto the appropriate top-level tasks.
 		moveSubtasks: function () {
+			// Remove any existing nested subtasks (which will not have been
+			// initialized properly anyway). But keep the same collection so
+			// we preserve event bindings
+			this.each(function (task) {
+				var subtasks = task.get('subtasks');
+				subtasks.remove(subtasks.models);
+			});
+
+			// Remove subtasks from top-level collection
       var subtasks = this.filter(function (task) {
         return task.get('isSubtask');
       });
       this.remove(subtasks);
 
+      // Add subtasks to the correct parent
       subtasks.forEach(function (subtask) {
         var parent = this.get(subtask.get('parentID'));
         if (parent) {
