@@ -32,6 +32,8 @@ var app = app || {};
       this.$main = this.$('#main');
       this.$list = this.$('#todo-list');
 
+      this.addAll();
+
       this.listenTo(this.collection, 'add', this.addOne);
       this.listenTo(this.collection, 'reset', this.addAll);
       this.listenTo(this.collection, 'change:completed', this.filterOne);
@@ -43,8 +45,6 @@ var app = app || {};
     // Re-rendering the list just means showing or hiding the main list
     // as appropriate. The rest of the view doesn't change
     render: function () {
-      console.log('rednering list view');
-      console.dir(this.events)
       if (this.collection.length) {
         this.$main.show();
       } else {
