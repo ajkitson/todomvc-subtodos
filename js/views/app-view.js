@@ -19,6 +19,10 @@ var app = app || {};
     // Our template for the line of statistics at the bottom of the list
     statsTemplate: _.template($('#stats-template').html()),
 
+    events: {
+      'click #clear-completed': 'clearCompleted',
+    },
+
     // Initialize root todo list and retrieve it from local storage
     initialize: function () {
       this.rootListView = new app.ListView({
@@ -57,6 +61,12 @@ var app = app || {};
       } else {
         this.$footer.hide();
       }
+    },
+
+    // Clear all completed todo items, destroying their models.
+    clearCompleted: function () {
+      _.invoke(app.todos.completed(), 'destroy');
+      return false;
     },
 
   });
