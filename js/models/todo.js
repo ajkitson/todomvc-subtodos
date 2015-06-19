@@ -15,12 +15,13 @@ var app = app || {};
 			return {
 				title: '',
 				completed: false,
-				subtasks: new app.Todos()
+				subtasks: new app.Subtasks()
 			};
 		},
 
 		initialize: function () {
-			this.listenTo(this.get('subtasks'), 'change:completed', this.checkDone);
+			var subtasks = this.get('subtasks');
+			this.listenTo(subtasks, 'change:completed', this.checkDone);
 		},
 
 		// Toggle the `completed` state of this todo item.
@@ -33,7 +34,7 @@ var app = app || {};
 		parse: function (data) {
 			if (Array.isArray(data.subtasks)) {
 				var existingSubtasks = this.get('subtasks');
-				data.subtasks = existingSubtasks || new app.Todos(data.subtasks);
+				data.subtasks = existingSubtasks || new app.Subtasks(data.subtasks);
 			}
 			return data;
 		},
@@ -52,7 +53,7 @@ var app = app || {};
 				this.set('completed', true);
 			}
 
-		}
+		},
 
 	});
 })();
