@@ -21,7 +21,7 @@
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
 		<script type="text/template" id="list-template">
-    	<input class="new-todo" placeholder="What needs to be done?" autofocus>
+    	<input class="new-todo" placeholder="<%= isRoot ? 'What needs to be done?' : 'add subtask' %>" autofocus>
 			<section id="main">
 	      <% if (isRoot) { %>
 	      <label for="toggle-all">Mark all as complete</label>
