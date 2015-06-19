@@ -19,6 +19,10 @@ var app = app || {};
 			};
 		},
 
+		initialize: function () {
+			this.listenTo(this.get('subtasks'), 'change:completed', this.checkDone);
+		},
+
 		// Toggle the `completed` state of this todo item.
 		toggle: function () {
 			this.save({
@@ -28,9 +32,26 @@ var app = app || {};
 
 		parse: function (data) {
 			if (Array.isArray(data.subtasks)) {
-				data.subtasks = new app.Todos(data.subtasks);
+				var existingSubtasks = this.get('subtasks');
+				data.subtasks = existingSubtasks || new app.Todos(data.subtasks);
 			}
 			return data;
+		},
+
+		checkDone: function () {
+			if (this.get('completed')) {
+				return;
+			}
+
+			var subtasks = this.get('subtasks');
+			var allComplete = subtasks.every(function (subtask) {
+				return subtask.get('completed');
+			});
+
+			if (subtasks.length && allComplete) {
+				this.set('completed', true);
+			}
+
 		}
 
 	});
