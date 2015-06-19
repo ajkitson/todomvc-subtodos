@@ -54,6 +54,7 @@ var app = app || {};
       var todo = this.model.toJSON();
       todo.atRoot = this.model.collection === app.todos;
       todo.subtasksVisible = this.showSubtasks;
+      todo.subtaskCount = this.model.get('subtasks').length;
       this.$el.html(this.template(todo));
 
       if (this.showSubtasks) {

@@ -35,7 +35,9 @@
 				<input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
 				<label><%- title %></label>
 				<% if (atRoot) { %>
-				<button class="subtask"><%= subtasksVisible ? 'hide' : 'add/view' %> subtasks</button>
+				<button class="subtask">
+				  <%= subtasksVisible ? 'hide subtasks' : (subtaskCount + ' subtask' + (subtaskCount !== 1 ? 's' : '')) %>
+				</button>
 				<% } %>
 				<button class="destroy"></button>
 			</div>
@@ -65,7 +67,6 @@
 		<script src="node_modules/backbone.localstorage/backbone.localStorage.js"></script>
 		<script src="js/models/todo.js"></script>
 		<script src="js/collections/todos.js"></script>
-		<script src="js/collections/subtasks.js"></script>
 		<script src="js/views/todo-view.js"></script>
 		<script src="js/views/list-view.js"></script>
 		<script src="js/views/app-view.js"></script>
