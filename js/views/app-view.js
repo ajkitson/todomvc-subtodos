@@ -25,13 +25,18 @@ var app = app || {};
         collection: app.todos
       });
       this.$list = this.$('#rootlist');
+      this.$list.html(this.rootListView.render().el);
+
       this.$footer = this.$('#footer');
 
       app.todos.fetch({ reset: true });
       this.listenTo(app.todos, 'all', _.debounce(this.render, 0));
+
       this.render();
     },
 
+    // We just need to update footer stats on render. The list view
+    // in this.$list takes care of itself once it's on the DOM
     render: function () {
       var completed = app.todos.completed().length;
       var remaining = app.todos.remaining().length;
@@ -52,9 +57,6 @@ var app = app || {};
       } else {
         this.$footer.hide();
       }
-
-      // update todos
-      this.$list.html(this.rootListView.render().el);
     },
 
   });
