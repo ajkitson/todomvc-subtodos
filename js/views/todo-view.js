@@ -82,7 +82,8 @@ var app = app || {};
     },
 
     // Switch this view into `"editing"` mode, displaying the input field.
-    edit: function () {
+    edit: function (e) {
+      e.stopPropagation();
       this.$el.addClass('editing');
       this.$input.focus();
     },

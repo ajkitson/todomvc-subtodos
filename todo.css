@@ -64,3 +64,15 @@
 #todo-list li .toggle {
   margin: 15px 0;
 }
+
+
+#todo-list li.editing>.edit {
+  display: block;
+  width: 506px;
+  padding: 13px 17px 12px 17px;
+  margin: 0 0 0 43px;
+}
+
+#todo-list li.editing>.view {
+  display: none;
+}
