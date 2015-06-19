@@ -1,3 +1,7 @@
+.subtask-list {
+  margin: 10px 0 10px 50px
+}
+
 .new-todo,
 .edit {
   position: relative;

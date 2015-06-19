@@ -20,9 +20,13 @@ var app = app || {};
     // At initialization we bind to the relevant events on the `Todos`
     // collection, when items are added or changed.
     initialize: function () {
+      var isRoot = this.collection === app.todos;
       this.$el.html(this.listTemplate({
-        isRoot: this.collection === app.todos
+        isRoot: isRoot
       }));
+      if (!isRoot) {
+        this.$el.addClass('subtask-list');
+      }
       this.allCheckbox = this.$('#toggle-all')[0];
       this.$input = this.$('.new-todo');
       this.$main = this.$('#main');
