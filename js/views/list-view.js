@@ -19,7 +19,7 @@ var app = app || {};
     // At initialization we bind to the relevant events on the `Todos`
     // collection, when items are added or changed.
     initialize: function () {
-      var isRoot = this.collection === app.todos;
+      var isRoot = app.isRoot(this.collection);
       this.$el.html(this.listTemplate({
         isRoot: isRoot
       }));
@@ -90,7 +90,9 @@ var app = app || {};
     // persisting it to *localStorage*.
     createOnEnter: function (e) {
       if (e.which === ENTER_KEY && this.$input.val().trim()) {
-        this.collection.create(this.newAttributes());
+        var todo = this.newAttributes();
+        todo.isSubtask = !app.isRoot(this.collection);
+        this.collection.create(todo);
         this.$input.val('');
       }
     },

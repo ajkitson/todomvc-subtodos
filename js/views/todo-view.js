@@ -50,10 +50,12 @@ var app = app || {};
       if (this.model.changed.id !== undefined) {
         return;
       }
+
       var todo = this.model.toJSON();
       todo.atRoot = this.model.collection === app.todos;
       todo.subtasksVisible = this.showSubtasks;
       this.$el.html(this.template(todo));
+
       if (this.showSubtasks) {
         this.$el.append(new app.ListView({
           collection: this.model.get('subtasks')
@@ -138,7 +140,7 @@ var app = app || {};
 
     // Remove the item, destroy the model from *localStorage* and delete its view.
     clear: function () {
-      this.model.destroy();
+    	this.model.clear();
     },
 
     toggleSubtasks: function () {

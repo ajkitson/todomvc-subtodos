@@ -7,6 +7,9 @@ var app = app || {};
   // The Application
   // ---------------
   app.todos = new app.Todos();
+  app.isRoot = function (collection) {
+    return app.todos === collection;
+  };
 
   // Our overall **AppView** is the top-level piece of UI. It is mostly
   // a container for the root todo list view

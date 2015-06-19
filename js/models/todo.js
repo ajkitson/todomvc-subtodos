@@ -55,5 +55,14 @@ var app = app || {};
 
 		},
 
+		clear: function () {
+			var subtasks = this.get('subtasks');
+			var subtask;
+			while (subtask = subtasks.first()) {
+				subtask.destroy();
+			}
+			this.destroy();
+		}
+
 	});
 })();
