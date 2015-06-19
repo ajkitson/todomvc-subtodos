@@ -141,7 +141,7 @@ var app = app || {};
 
     // Remove the item, destroy the model from *localStorage* and delete its view.
     clear: function () {
-    	this.model.clear();
+      this.model.clear();
     },
 
     toggleSubtasks: function () {
